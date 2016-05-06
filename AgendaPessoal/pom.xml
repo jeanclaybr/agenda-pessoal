@@ -12,9 +12,41 @@
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jbehave.core.version>4.0.5</jbehave.core.version>
+        <jbehave.site.version>3.3</jbehave.site.version>
+        <embeddables>**/*Stories.java</embeddables>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>6.0</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- JBeaheve -->
+        
+        <dependency>
+            <groupId>org.jbehave</groupId>
+            <artifactId>jbehave-core</artifactId>
+            <version>${jbehave.core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jbehave</groupId>
+            <artifactId>jbehave-core</artifactId>
+            <version>${jbehave.core.version}</version>
+            <classifier>resources</classifier>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>org.jbehave.site</groupId>
+            <artifactId>jbehave-site-resources</artifactId>
+            <version>${jbehave.site.version}</version>
+            <type>zip</type>
+        </dependency>
+        
+        <!-- Dependências de teste -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -28,12 +60,6 @@
             <!--            <version>3.4.1</version>-->
             <version>2.4.1</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>6.0</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -84,6 +110,40 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.jbehave</groupId>
+                <artifactId>jbehave-maven-plugin</artifactId>
+                <version>${jbehave.core.version}</version>
+                <executions>
+                    <execution>
+                        <id>unpack-view-resources</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>unpack-view-resources</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>embeddable-stories</id>
+                        <phase>integration-test</phase>
+                        <configuration>
+                            <includes>
+                                <include>${embeddables}</include>
+                            </includes>
+                            <excludes />
+                            <ignoreFailureInStories>true</ignoreFailureInStories>
+                            <ignoreFailureInView>false</ignoreFailureInView>
+                            <threads>1</threads>
+                            <metaFilters>
+                                <metaFilter></metaFilter>
+                            </metaFilters>
+                        </configuration>
+                        <goals>
+                            <goal>run-stories-as-embeddables</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            
         </plugins>
     </build>
 
