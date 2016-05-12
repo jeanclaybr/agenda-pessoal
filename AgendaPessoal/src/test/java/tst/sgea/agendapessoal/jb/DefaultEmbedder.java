@@ -50,9 +50,9 @@ public class DefaultEmbedder extends Embedder {
     public Configuration configuration() {
         
         Class<? extends DefaultEmbedder> embedderClass = this.getClass();
-//        LocalizedKeywords localizedKeywords = new LocalizedKeywords(new Locale("pt"));
+        LocalizedKeywords localizedKeywords = new LocalizedKeywords(new Locale("pt"));
         return new MostUsefulConfiguration()
-//                .useKeywords(localizedKeywords)
+                .useKeywords(localizedKeywords)
                 .useStoryLoader(new LoadFromClasspath(embedderClass.getClassLoader()))
                 .useStoryReporterBuilder(new StoryReporterBuilder()
                         .withCodeLocation(CodeLocations.codeLocationFromClass(embedderClass))
@@ -63,7 +63,7 @@ public class DefaultEmbedder extends Embedder {
                         .addConverters(
                                 new DateConverter(new SimpleDateFormat("dd/MM/yyyy"))))
                 .useStepMonitor(new SilentStepMonitor())
-//                .useStoryParser(new RegexStoryParser(localizedKeywords))
+                .useStoryParser(new RegexStoryParser(localizedKeywords))
             ;
     }
     
