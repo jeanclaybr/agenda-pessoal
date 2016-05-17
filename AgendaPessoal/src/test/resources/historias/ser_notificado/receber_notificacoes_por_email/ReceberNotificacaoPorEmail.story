@@ -11,13 +11,13 @@ Desejo receber um email informando de meus compromissos
 
 Cenário: Pessoa recebe notificação de um comprimisso
 
-Dado que possuo o seguinte compromisso:
+Dado que possuo o seguinte compromisso: 
 |descricao                 |inicio          |fim             |notificacoes|
 |Consulta com nutricionista|10/08/2015 09:30|10/08/2015 11:30|1 hora antes|
 Dado que o meu email é drummond@poesia.com.br
 Dado que meu nome é Carlos Drummond de Andrade
 Quando chegar a hora de enviar as notificações pendentes
-Então receberei o seguinte email:
+Então receberei o seguinte email: 
     Assunto: Lembrete!
     Mensagem:
         Oi, Carlos!
@@ -31,7 +31,7 @@ Então receberei o seguinte email:
 
 Cenário: Pessoa recebe notificação de vários comprimissos
 
-Dado que possuo os compromissos:
+Dado que possuo os compromissos: 
 |descricao                 |inicio          |fim             |notificacoes              |
 |Consulta com nutricionista|10/08/2015 09:30|10/08/2015 11:30| 1 hora antes             |
 |Buteco com os amigos      |10/08/2015 19:30|                |11 horas antes            |
